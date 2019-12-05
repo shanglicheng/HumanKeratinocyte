@@ -5,7 +5,9 @@ plotTSNEByType = function(project.list) {
   g = ggplot(data = project.list$tSNE, mapping = aes(x = tSNE_1, y = tSNE_2, color = project.list$Type)) + 
     scale_colour_manual(name = "Type", values = c("mediumspringgreen", "lightskyblue", "indianred1")) + 
     geom_point(size = 1) + 
-    theme_bw() + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),axis.line = element_line(colour = "black"))
+    theme_bw() + 
+    theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+          axis.line = element_line(colour = "black"))
   return(g)
 }
 plotTSNEByCluster = function(project.list) {
@@ -13,7 +15,9 @@ plotTSNEByCluster = function(project.list) {
   g = ggplot(data = project.list$tSNE, mapping = aes(x = tSNE_1, y = tSNE_2, color = project.list$Cluster)) + 
     scale_colour_manual(name = "Cluster", values = c("#F8766D", "#B79F00", "#00BA38", "#00BFC4", "#619CFF", "#F564E3")) + 
     geom_point(size = 1) + 
-    theme_bw() + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),axis.line = element_line(colour = "black"))
+    theme_bw() + 
+    theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+          axis.line = element_line(colour = "black"))
   return(g)
 }
 plotMarkerWithShape_skin = function(project.list, marker){
@@ -29,7 +33,8 @@ plotMarkerWithShape_skin = function(project.list, marker){
     scale_shape_manual(values = 1:(nlevels((df_tmp$Cluster)))) + theme_bw()+ 
     theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), axis.line = element_line(colour = "black")) + 
     xlim(c(min(project.list$tSNE$tSNE_1), max(project.list$tSNE$tSNE_1))) + 
-    ylim(c(min(project.list$tSNE$tSNE_2), max(project.list$tSNE$tSNE_2))) + ggtitle(paste0(marker," in normal skin"))
+    ylim(c(min(project.list$tSNE$tSNE_2), max(project.list$tSNE$tSNE_2))) + 
+    ggtitle(paste0(marker," in normal skin"))
   return(g)
 }
 plotMarkerWithShape_acute = function(project.list, marker){
@@ -42,10 +47,13 @@ plotMarkerWithShape_acute = function(project.list, marker){
     scale_colour_gradient2(low = "gray", mid = "pink" ,high = "red", midpoint = ((max(df_tmp$Log2RPKM)+min(df_tmp$Log2RPKM))/2),
                            space = "Lab", na.value = "midnightblue", guide = "colourbar",
                            limits=c(min(df_tmp$Log2RPKM), max(df_tmp$Log2RPKM))) + 
-    scale_shape_manual(values = 1:(nlevels((df_tmp$Cluster)))) + theme_bw()+ 
-    theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), axis.line = element_line(colour = "black")) + 
+    scale_shape_manual(values = 1:(nlevels((df_tmp$Cluster)))) + 
+    theme_bw()+ 
+    theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), 
+          axis.line = element_line(colour = "black")) + 
     xlim(c(min(project.list$tSNE$tSNE_1), max(project.list$tSNE$tSNE_1))) + 
-    ylim(c(min(project.list$tSNE$tSNE_2), max(project.list$tSNE$tSNE_2))) + ggtitle(paste0(marker," in acute wound"))
+    ylim(c(min(project.list$tSNE$tSNE_2), max(project.list$tSNE$tSNE_2))) + 
+    ggtitle(paste0(marker," in acute wound"))
   return(g)
 }
 plotMarkerWithShape_pu = function(project.list, marker){
@@ -61,11 +69,14 @@ plotMarkerWithShape_pu = function(project.list, marker){
     scale_shape_manual(values = 1:(nlevels((df_tmp$Cluster)))) + theme_bw()+ 
     theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), axis.line = element_line(colour = "black")) + 
     xlim(c(min(project.list$tSNE$tSNE_1), max(project.list$tSNE$tSNE_1))) + 
-    ylim(c(min(project.list$tSNE$tSNE_2), max(project.list$tSNE$tSNE_2))) + ggtitle(paste0(marker," in PU"))
+    ylim(c(min(project.list$tSNE$tSNE_2), max(project.list$tSNE$tSNE_2))) + 
+    ggtitle(paste0(marker," in PU"))
   return(g)
 }
 plotMarkerBar_skin = function(project.list, marker){
-  od = c(grep('KC_1', project.list$Cluster), grep('KC_2', project.list$Cluster), grep('KC_3', project.list$Cluster),
+  od = c(grep('KC_1', project.list$Cluster), 
+         grep('KC_2', project.list$Cluster), 
+         grep('KC_3', project.list$Cluster),
          grep('KC_4', project.list$Cluster),
          grep('Melanocyte', project.list$Cluster),
          grep('Immune cell', project.list$Cluster))
@@ -82,12 +93,16 @@ plotMarkerBar_skin = function(project.list, marker){
     scale_color_manual(values = c("#F8766D", "#B79F00", "#00BA38", "#00BFC4", "#619CFF", "#F564E3")) +
     scale_fill_manual(values = c("#F8766D", "#B79F00", "#00BA38", "#00BFC4", "#619CFF", "#F564E3")) + 
     theme_bw() + 
-    theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"), panel.border = element_blank(), panel.background = element_blank()) + 
+    theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+          axis.line = element_line(colour = "black"), panel.border = element_blank(), 
+          panel.background = element_blank()) + 
     ggtitle(paste0(marker," in normal skin"))
   return(g)
 }
 plotMarkerBar_acute = function(project.list, marker){
-  od = c(grep('KC_1', project.list$Cluster), grep('KC_2', project.list$Cluster), grep('KC_3', project.list$Cluster),
+  od = c(grep('KC_1', project.list$Cluster), 
+         grep('KC_2', project.list$Cluster), 
+         grep('KC_3', project.list$Cluster),
          grep('KC_4', project.list$Cluster),
          grep('Melanocyte', project.list$Cluster),
          grep('Immune cell', project.list$Cluster))
@@ -104,12 +119,18 @@ plotMarkerBar_acute = function(project.list, marker){
     scale_color_manual(values = c("#F8766D", "#B79F00", "#00BA38", "#00BFC4", "#619CFF", "#F564E3")) +
     scale_fill_manual(values = c("#F8766D", "#B79F00", "#00BA38", "#00BFC4", "#619CFF", "#F564E3")) + 
     theme_bw() + 
-    theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"), panel.border = element_blank(), panel.background = element_blank()) + 
+    theme(panel.grid.major = element_blank(), 
+          panel.grid.minor = element_blank(), 
+          axis.line = element_line(colour = "black"), 
+          panel.border = element_blank(), 
+          panel.background = element_blank()) + 
     ggtitle(paste0(marker," in normal skin"))
   return(g)
 }
 plotMarkerBar_pu = function(project.list, marker){
-  od = c(grep('KC_1', project.list$Cluster), grep('KC_2', project.list$Cluster), grep('KC_3', project.list$Cluster),
+  od = c(grep('KC_1', project.list$Cluster), 
+         grep('KC_2', project.list$Cluster), 
+         grep('KC_3', project.list$Cluster),
          grep('KC_4', project.list$Cluster),
          grep('Melanocyte', project.list$Cluster),
          grep('Immune cell', project.list$Cluster))
@@ -126,11 +147,13 @@ plotMarkerBar_pu = function(project.list, marker){
     scale_color_manual(values = c("#F8766D", "#B79F00", "#00BA38", "#00BFC4", "#619CFF", "#F564E3")) +
     scale_fill_manual(values = c("#F8766D", "#B79F00", "#00BA38", "#00BFC4", "#619CFF", "#F564E3")) + 
     theme_bw() + 
-    theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"), panel.border = element_blank(), panel.background = element_blank()) + 
+    theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+          axis.line = element_line(colour = "black"), 
+          panel.border = element_blank(), 
+          panel.background = element_blank()) + 
     ggtitle(paste0(marker," in normal skin"))
   return(g)
 }
-
 
 ui = shinyUI(
   fluidPage(
@@ -210,5 +233,3 @@ server <- shinyServer(
 )
 
 shinyApp(ui = ui, server = server)
-
-
